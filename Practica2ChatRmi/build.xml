@@ -1,0 +1,50 @@
+<project name="Practica2ChatRmi" default="build">
+
+    <!-- Properties -->
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="dist.dir" location="dist"/>
+    <property name="doc.dir" location="doc"/>
+
+    <!-- Path for libraries -->
+    <path id="classpath">
+        <fileset dir="lib">
+        </fileset>
+    </path>
+
+    <!-- Target: Compile -->
+    <target name="compile" depends="init">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <!-- Target: Build -->
+    <target name="build" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/Practica2ChatRmi.jar" basedir="${build.dir}">
+        </jar>
+    </target>
+
+    <!-- Target: Javadoc -->
+    <target name="javadoc" depends="init">
+        <mkdir dir="${doc.dir}"/>
+        <javadoc packagenames="es.ubu.lsi" sourcepath="${src.dir}" destdir="${doc.dir}/javadoc">
+            <link href="http://docs.oracle.com/javase/8/docs/api"/>
+        </javadoc>
+    </target>
+
+    <!-- Target: Clean -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${doc.dir}"/>
+    </target>
+
+    <!-- Target: Init -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+</project>
